@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Пекарня "Ароматная булочная"</title>
+    <!--link rel="stylesheet" href="style.css"-->
+    <style>
+        /* style.css */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            :root {
+                --primary-color: #f8b595;
+                --secondary-color: #d89a6d;
+                --dark-color: #5c3d2e;
+                --light-color: #fff8f0;
+                --text-color: #333;
+                --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                --border-radius: 10px;
+            }
+
+            body {
+                font-family: 'Roboto', sans-serif;
+                line-height: 1.6;
+                color: var(--text-color);
+                background-color: var(--light-color);
+            }
+
+            h1, h2, h3, h4 {
+                font-family: 'Playfair Display', serif;
+                font-weight: 700;
+                margin-bottom: 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                color: var(--dark-color);
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 2rem;
+                color: var(--dark-color);
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                margin-bottom: 1rem;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            /* Навигация */
+            .navbar {
+                background-color: white;
+                box-shadow: var(--shadow);
+                position: sticky;
+                top: 0;
+                z-index: 100;
+            }
+
+            .nav-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 2rem;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .logo {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: var(--dark-color);
+            }
+
+            .logo i {
+                color: var(--secondary-color);
+                margin-right: 0.5rem;
+            }
+
+            .nav-menu {
+                display: flex;
+                list-style: none;
+            }
+
+            .nav-menu li {
+                margin-left: 2rem;
+            }
+
+            .nav-menu a {
+                font-weight: 500;
+                transition: color 0.3s;
+                padding: 0.5rem 0;
+                position: relative;
+            }
+
+            .nav-menu a:hover, .nav-menu a.active {
+                color: var(--secondary-color);
+            }
+
+            .nav-menu a.active::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background-color: var(--secondary-color);
+            }
+
+            /* Кнопки */
+            .btn {
+                display: inline-block;
+                background-color: var(--primary-color);
+                color: white;
+                padding: 0.8rem 1.5rem;
+                border-radius: 50px;
+                font-weight: 500;
+                transition: all 0.3s;
+                border: none;
+                cursor: pointer;
+                text-align: center;
+            }
+
+            .btn:hover {
+                background-color: var(--secondary-color);
+                transform: translateY(-3px);
+                box-shadow: var(--shadow);
+            }
+
+            .small-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .submit-btn {
+                width: 100%;
+                font-size: 1.1rem;
+                padding: 1rem;
+                margin-top: 1rem;
+            }
+
+            /* Главная страница */
+            .hero {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 4rem 2rem;
+                max-width: 1200px;
+                margin: 0 auto;
+                gap: 2rem;
+            }
+
+            .hero-content {
+                flex: 1;
+            }
+
+            .hero-image {
+                flex: 1;
+                border-radius: var(--border-radius);
+                overflow: hidden;
+                box-shadow: var(--shadow);
+            }
+
+            .hero-image img {
+                width: 100%;
+                height: auto;
+                display: block;
+                transition: transform 0.5s;
+            }
+
+            .hero-image img:hover {
+                transform: scale(1.05);
+            }
+
+            /* Особенности */
+            .features {
+                padding: 4rem 0;
+                background-color: white;
+            }
+
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+
+            .feature {
+                text-align: center;
+                padding: 2rem;
+                border-radius: var(--border-radius);
+                background-color: var(--light-color);
+                box-shadow: var(--shadow);
+                transition: transform 0.3s;
+            }
+
+            .feature:hover {
+                transform: translateY(-10px);
+            }
+
+            .feature i {
+                font-size: 2.5rem;
+                color: var(--secondary-color);
+                margin-bottom: 1rem;
+            }
+
+            /* Популярные товары */
+            .popular {
+                padding: 4rem 0;
+            }
+
+            .products-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .product {
+                background-color: white;
+                border-radius: var(--border-radius);
+                overflow: hidden;
+                box-shadow: var(--shadow);
+                transition: transform 0.3s;
+                padding-bottom: 1.5rem;
+            }
+
+            .product:hover {
+                transform: translateY(-10px);
+            }
+
+            .product img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .product h3, .product .price {
+                padding: 0 1rem;
+                margin-top: 0.5rem;
+            }
+
+            .product .price {
+                font-weight: 700;
+                color: var(--secondary-color);
+                font-size: 1.2rem;
+            }
+
+            .product .btn {
+                margin: 1rem;
+            }
+
+            .center {
+                text-align: center;
+            }
+
+            /* Общие стили для страниц */
+            .page {
+                padding: 3rem 0;
+            }
+
+            .menu-intro, .order-intro {
+                text-align: center;
+                max-width: 800px;
+                margin: 0 auto 3rem;
+                font-size: 1.1rem;
+            }
+
+            /* Страница "О нас" */
+            .about-content {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+                margin-bottom: 3rem;
+                align-items: start;
+            }
+
+            .about-image {
+                border-radius: var(--border-radius);
+                overflow: hidden;
+                box-shadow: var(--shadow);
+            }
+
+            .about-image img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .values-list {
+                list-style: none;
+                margin: 1.5rem 0;
+            }
+
+            .values-list li {
+                margin-bottom: 0.8rem;
+                display: flex;
+                align-items: center;
+            }
+
+            .values-list i {
+                color: var(--secondary-color);
+                margin-right: 0.8rem;
+            }
+
+            .team-section {
+                margin: 4rem 0;
+            }
+
+            .team-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+
+            .team-member {
+                text-align: center;
+                background-color: white;
+                padding: 2rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+            }
+
+            .team-member img {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 1rem;
+            }
+
+            .certificates {
+                margin-top: 4rem;
+            }
+
+            .certificates-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+
+            .certificate {
+                text-align: center;
+                padding: 2rem;
+                background-color: white;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+            }
+
+            .certificate i {
+                font-size: 3rem;
+                color: var(--secondary-color);
+                margin-bottom: 1rem;
+            }
+
+            /* Страница "Меню" */
+            .menu-category {
+                margin-bottom: 3rem;
+                background-color: white;
+                padding: 2rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+            }
+
+            .menu-category h2 {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1.5rem;
+                color: var(--dark-color);
+            }
+
+            .menu-category h2 i {
+                margin-right: 0.8rem;
+                color: var(--secondary-color);
+            }
+
+            .menu-items {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .menu-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem;
+                border-bottom: 1px solid #eee;
+            }
+
+            .menu-item:last-child {
+                border-bottom: none;
+            }
+
+            .menu-item-info h3 {
+                margin-bottom: 0.3rem;
+            }
+
+            .menu-item-info p {
+                color: #666;
+                font-size: 0.95rem;
+                margin-bottom: 0;
+            }
+
+            .menu-item-price {
+                font-weight: 700;
+                color: var(--secondary-color);
+                font-size: 1.2rem;
+                white-space: nowrap;
+                margin-left: 1rem;
+            }
+
+            .menu-note {
+                background-color: white;
+                padding: 2rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+                margin-top: 3rem;
+            }
+
+            /* Страница "Заказать" */
+            .order-container {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 3rem;
+                margin-bottom: 3rem;
+            }
+
+            .order-form-container {
+                background-color: white;
+                padding: 2rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+            }
+
+            .order-info {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .info-box {
+                background-color: white;
+                padding: 2rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+            }
+
+            .info-box h3 {
+                color: var(--dark-color);
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+            }
+
+            .info-box h3 i {
+                margin-right: 0.5rem;
+                color: var(--secondary-color);
+            }
+
+            .info-box ul {
+                list-style: none;
+                padding-left: 0;
+            }
+
+            .info-box li {
+                margin-bottom: 0.8rem;
+                display: flex;
+                align-items: flex-start;
+            }
+
+            .info-box li i {
+                color: var(--secondary-color);
+                margin-right: 0.8rem;
+                margin-top: 0.2rem;
+            }
+
+            .popular-items {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .popular-item {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.8rem;
+                background-color: var(--light-color);
+                border-radius: 5px;
+            }
+
+            .text-link {
+                color: var(--secondary-color);
+                text-decoration: underline;
+            }
+
+            .text-link:hover {
+                color: var(--dark-color);
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            /* Формы */
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+            }
+
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                width: 100%;
+                padding: 0.8rem;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-family: 'Roboto', sans-serif;
+                font-size: 1rem;
+            }
+
+            .form-group input:focus,
+            .form-group textarea:focus,
+            .form-group select:focus {
+                outline: none;
+                border-color: var(--secondary-color);
+            }
+
+            .form-hint {
+                font-size: 0.9rem;
+                color: #666;
+                margin-top: 0.5rem;
+            }
+
+            .checkbox-group {
+                display: flex;
+                align-items: flex-start;
+            }
+
+            .checkbox-group input {
+                width: auto;
+                margin-right: 0.8rem;
+                margin-top: 0.3rem;
+            }
+
+            /* Шаги заказа */
+            .order-success {
+                background-color: white;
+                padding: 3rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+                margin-top: 3rem;
+            }
+
+            .success-steps {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+
+            .step {
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .step-number {
+                width: 50px;
+                height: 50px;
+                background-color: var(--primary-color);
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin: 0 auto 1rem;
+            }
+
+            /* Футер */
+            .footer {
+                background-color: var(--dark-color);
+                color: white;
+                padding: 3rem 0 1rem;
+            }
+
+            .footer-content {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .footer-section h3 {
+                color: var(--primary-color);
+                margin-bottom: 1.5rem;
+            }
+
+            .footer-section p {
+                margin-bottom: 0.5rem;
+                display: flex;
+                align-items: center;
+            }
+
+            .footer-section i {
+                margin-right: 0.5rem;
+                color: var(--primary-color);
+            }
+
+            .social {
+                display: flex;
+                gap: 1rem;
+            }
+
+            .social a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+                transition: all 0.3s;
+            }
+
+            .social a:hover {
+                background-color: var(--primary-color);
+                transform: translateY(-3px);
+            }
+
+            .footer-bottom {
+                text-align: center;
+                padding-top: 1.5rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            /* Адаптивность */
+            @media (max-width: 992px) {
+                .order-container {
+                    grid-template-columns: 1fr;
+                }
+                
+                .about-content {
+                    grid-template-columns: 1fr;
+                }
+                
+                .hero {
+                    flex-direction: column;
+                    padding: 2rem 1rem;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .nav-container {
+                    flex-direction: column;
+                    padding: 1rem;
+                }
+                
+                .nav-menu {
+                    margin-top: 1rem;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+                
+                .nav-menu li {
+                    margin: 0.5rem 1rem;
+                }
+                
+                h1 {
+                    font-size: 2rem;
+                }
+                
+                h2 {
+                    font-size: 1.8rem;
+                }
+                
+                .page {
+                    padding: 2rem 0;
+                }
+                
+                .order-form-container,
+                .info-box,
+                .menu-category,
+                .menu-note,
+                .order-success {
+                    padding: 1.5rem;
+                }
+            }
+                /* Дополнительные стили для страницы контактов */
+            .contacts-container {
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .contact-info-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .contact-card {
+                background-color: white;
+                padding: 2rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+                text-align: center;
+                transition: transform 0.3s;
+            }
+
+            .contact-card:hover {
+                transform: translateY(-10px);
+            }
+
+            .contact-icon {
+                width: 70px;
+                height: 70px;
+                background-color: var(--light-color);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 1.5rem;
+            }
+
+            .contact-icon i {
+                font-size: 2rem;
+                color: var(--secondary-color);
+            }
+
+            .branches-section {
+                background-color: white;
+                padding: 2rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+            }
+
+            .branches-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                margin-top: 1.5rem;
+            }
+
+            .branch-card {
+                background-color: var(--light-color);
+                padding: 1.5rem;
+                border-radius: var(--border-radius);
+                border-left: 4px solid var(--secondary-color);
+            }
+
+            .branch-card h3 {
+                color: var(--dark-color);
+                margin-bottom: 1rem;
+            }
+
+            .branch-card p {
+                margin-bottom: 0.5rem;
+                display: flex;
+                align-items: center;
+            }
+
+            .branch-card i {
+                margin-right: 0.5rem;
+                color: var(--secondary-color);
+                width: 20px;
+            }
+
+            .contact-form-section {
+                background-color: white;
+                padding: 2rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+            }
+
+            .form-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+
+            @media (max-width: 768px) {
+                .form-row {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .map-section {
+                background-color: white;
+                padding: 2rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+            }
+
+            .map-placeholder {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+                margin-top: 1.5rem;
+            }
+
+            .map-info {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .map-info p {
+                display: flex;
+                align-items: flex-start;
+            }
+
+            .map-info i {
+                margin-right: 0.8rem;
+                color: var(--secondary-color);
+                margin-top: 0.2rem;
+            }
+
+            .map-image {
+                border-radius: var(--border-radius);
+                overflow: hidden;
+            }
+
+            .map-image img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            @media (max-width: 768px) {
+                .map-placeholder {
+                    grid-template-columns: 1fr;
+                }
+            }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <i class="fas fa-bread-slice"></i> Ароматная булочная
+            </a>
+            <ul class="nav-menu">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/about">О нас</a></li>
+                <li><a href="/menu">Меню</a></li>
+                <li><a href="/order">Заказать</a></li>
+                <li><a href="/contacts" class="active">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Контент страницы -->
+    <main class="container page">
+        <h1>Контакты</h1>
+        <p class="menu-intro">Мы всегда рады видеть вас в нашей пекарне! Приходите за свежей выпечкой или свяжитесь с нами любым удобным способом.</p>
+        
+        <div class="contacts-container">
+            <!-- Контактная информация -->
+            <div class="contact-info-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Адрес пекарни</h3>
+                    <p>ул. Пушкина, 10</p>
+                    <p>Ежедневно с 7:00 до 21:00</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Телефон</h3>
+                    <p>+7 (999) 123-45-67</p>
+                    <p>Звонки принимаем с 8:00 до 20:00</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>hello@bakery.ru</p>
+                    <p>Отвечаем в течение 24 часов</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Часы работы</h3>
+                    <p>Пн-Вс: 7:00 - 21:00</p>
+                    <p>Без перерывов и выходных</p>
+                </div>
+            </div>
+            
+            <!-- Другие филиалы -->
+            <div class="branches-section">
+                <h2>Другие филиалы</h2>
+                <div class="branches-grid">
+                    <div class="branch-card">
+                        <h3>ул. Лермонтова, 25</h3>
+                        <p><i class="fas fa-clock"></i> с 8:00 до 22:00</p>
+                        <p><i class="fas fa-phone"></i> +7 (999) 123-45-68</p>
+                        <p><i class="fas fa-subway"></i> Метро "Центральная"</p>
+                    </div>
+                    
+                    <div class="branch-card">
+                        <h3>пр. Мира, 15</h3>
+                        <p><i class="fas fa-clock"></i> с 7:30 до 20:30</p>
+                        <p><i class="fas fa-phone"></i> +7 (999) 123-45-69</p>
+                        <p><i class="fas fa-subway"></i> Метро "Мирская"</p>
+                    </div>
+                    
+                    <div class="branch-card">
+                        <h3>ул. Гагарина, 42</h3>
+                        <p><i class="fas fa-clock"></i> с 9:00 до 20:00</p>
+                        <p><i class="fas fa-phone"></i> +7 (999) 123-45-70</p>
+                        <p><i class="fas fa-subway"></i> Метро "Космическая"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Форма обратной связи -->
+            <div class="contact-form-section">
+                <h2>Написать нам</h2>
+                <p>Есть вопросы или предложения? Напишите нам, и мы обязательно ответим!</p>
+                
+                <form class="contact-form" action="#" method="post">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-name">Ваше имя *</label>
+                            <input type="text" id="contact-name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-email">Ваш email *</label>
+                            <input type="email" id="contact-email" name="email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-subject">Тема сообщения</label>
+                        <input type="text" id="contact-subject" name="subject">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-message">Сообщение *</label>
+                        <textarea id="contact-message" name="message" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn submit-btn">
+                        <i class="fas fa-paper-plane"></i> Отправить сообщение
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Карта -->
+            <div class="map-section">
+                <h2>Как добраться</h2>
+                <div class="map-placeholder">
+                    <div class="map-info">
+                        <h3>Пекарня "Ароматная булочная"</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> ул. Пушкина, 10</p>
+                        <p><i class="fas fa-subway"></i> Ближайшее метро: "Центральная" (5 минут пешком)</p>
+                        <p><i class="fas fa-bus"></i> Автобусы: 12, 25, 47 (остановка "Улица Пушкина")</p>
+                        <p><i class="fas fa-car"></i> Парковка: бесплатная парковка на 10 мест перед пекарней</p>
+                    </div>
+                    <div class="map-image">
+                        <img src="images/bakery_photo.avif" alt="Карта расположения пекарни">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Ароматная булочная</h3>
+                    <p>Свежая выпечка каждый день с 7:00 до 21:00</p>
+                    <p><i class="fas fa-map-marker-alt"></i> ул. Пушкина, 10</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> hello@bakery.ru</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Пекарня "Ароматная булочная". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
