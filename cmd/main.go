@@ -1,17 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"mywebsite/internal/handlers"
 	"mywebsite/internal/db"
+	"mywebsite/internal/handlers"
 	"net/http"
 	"os"
 )
 
 func main() {
 	if len(os.Args) == 2 && os.Args[1] == "populate" {
-		fmt.Println("Populate!")
 		db.PopulateDb()
 		os.Exit(0)
 	}
@@ -22,6 +20,8 @@ func main() {
 	m.HandleFunc("/menu", handlers.MenuHandler)
 	m.HandleFunc("/order", handlers.OrderHandler)
 	m.HandleFunc("/images/", handlers.GetImages)
-	log.Println("Server started ...")
+	m.HandleFunc("/create_order", handlers.CreateOrder)
+	
+	log.Println("Server started on port :8080 ...")
 	http.ListenAndServe(":8080", m)
 }

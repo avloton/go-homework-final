@@ -57,6 +57,17 @@ func PopulateDb() {
 	log.Println("Finish")
 }
 
+func InsertNewOrder(order *models.Order) error {
+	db := DbConnect()
+	defer db.Close()
+	_, err := db.Exec("INSERT INTO orders (customer_name, telephone, email, address, delivery_date, delivery_time, order_list, comments, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+						order.CustomerName, order.Telephone, order.Email, order.Address, order.DeliveryDate, order.DeliveryTime, order.OrderList, order.Comments, order.PaymentMethod)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func SelectAllPopularProducts() []models.Product {
 	db := DbConnect()
 	defer db.Close()

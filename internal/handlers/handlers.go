@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"mywebsite/internal/db"
+	"mywebsite/internal/models"
 	"net/http"
 	"path"
 	"text/template"
@@ -87,4 +88,44 @@ func GetImages(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
+}
+
+func CreateOrder(w http.ResponseWriter, r *http.Request) {
+	var newOrder models.Order
+	if r.Method == http.MethodPost {
+		newOrder.CustomerName = r.FormValue("name")
+		newOrder.Telephone = r.FormValue("phone")
+		newOrder.Email = r.FormValue("email")
+		newOrder.Address = r.FormValue("address")
+		newOrder.DeliveryDate = r.FormValue("delivery-date")
+		newOrder.DeliveryTime = r.FormValue("delivery-time")
+		newOrder.OrderList = r.FormValue("order-items")
+		newOrder.Comments = r.FormValue("comments")
+		newOrder.PaymentMethod = r.FormValue("payment")
+		err := db.InsertNewOrder(&newOrder)
+		if err != nil {
+			log.Println(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		html := `
+				<!DOCTYPE html>
+				<html>
+				<head>
+					<title>Спасибо за заказ!</title>
+				</head>
+				<body>
+					<div class="thank-you-message">
+						<h2>Спасибо за ваш заказ!</h2>
+						<p>Мы получили вашу заявку и свяжемся с вами в ближайшее время для подтверждения.</p>
+						<a href="/">Вернуться на главную</a>
+					</div>
+				</body>
+				</html>
+			`
+		fmt.Fprintf(w, html)
+	} else {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+	}
+
 }
