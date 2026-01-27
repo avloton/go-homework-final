@@ -1,12 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"mywebsite/internal/handlers"
+	"mywebsite/internal/db"
 	"net/http"
+	"os"
 )
 
 func main() {
+	if len(os.Args) == 2 && os.Args[1] == "populate" {
+		fmt.Println("Populate!")
+		db.PopulateDb()
+		os.Exit(0)
+	}
 	m := http.NewServeMux()
 	m.HandleFunc("/", handlers.IndexHandler)
 	m.HandleFunc("/about", handlers.AboutHandler)

@@ -7,6 +7,56 @@ import (
 )
 
 
+func PopulateDb() {
+	log.Println("Begin populate database ...")
+	db := DbConnect()
+	defer db.Close()
+	query := `
+		CREATE TABLE "feedbacks" (
+			"id"	INTEGER NOT NULL,
+			"customer_name"	TEXT NOT NULL,
+			"subject"	TEXT,
+			"message"	TEXT NOT NULL,
+			PRIMARY KEY("id" AUTOINCREMENT)
+		);
+
+		CREATE TABLE "orders" (
+			"id"	INTEGER NOT NULL,
+			"customer_name"	TEXT NOT NULL,
+			"telephone"	TEXT NOT NULL,
+			"email"	TEXT,
+			"address"	TEXT NOT NULL,
+			"delivery_date"	TEXT NOT NULL,
+			"delivery_time"	TEXT NOT NULL,
+			"order_list"	TEXT NOT NULL,
+			"comments"	TEXT,
+			"payment_method"	TEXT NOT NULL,
+			"completed"	TEXT NOT NULL DEFAULT 'No',
+			PRIMARY KEY("id" AUTOINCREMENT)
+		);
+
+		CREATE TABLE "popular_products" (
+			"id"	INTEGER NOT NULL,
+			"name"	TEXT NOT NULL,
+			"description"	TEXT,
+			"type"	TEXT,
+			"price"	INTEGER,
+			"units"	TEXT DEFAULT 'шт',
+			"image_path"	TEXT,
+			PRIMARY KEY("id" AUTOINCREMENT)
+		);
+
+		INSERT INTO popular_products (name, description, type, price, units, image_path) VALUES ('Ржаной хлеб', '', '', 120, '500г', 'images/rue_bread.avif');
+		INSERT INTO popular_products (name, description, type, price, units, image_path) VALUES ('Круассан с шок.', '', '', 90, 'шт', 'images/croissant_choco.avif');
+		INSERT INTO popular_products (name, description, type, price, units, image_path) VALUES ('Яблочный пирог', '', '', 350, '800г', 'images/apple_pie.avif');
+		INSERT INTO popular_products (name, description, type, price, units, image_path) VALUES ('Булочка с корицей', '', '', 75, 'шт', 'images/cinnamon_bun.avif');`
+	_, err := db.Exec(query)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println("Finish")
+}
+
 func SelectAllPopularProducts() []models.Product {
 	db := DbConnect()
 	defer db.Close()
