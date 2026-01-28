@@ -19,9 +19,13 @@ func main() {
 	m.HandleFunc("/contacts", handlers.ContactsHandler)
 	m.HandleFunc("/menu", handlers.MenuHandler)
 	m.HandleFunc("/order", handlers.OrderHandler)
+	m.HandleFunc("/show_orders", handlers.ShowOrdersHandler)
 	m.HandleFunc("/images/", handlers.GetImages)
 	m.HandleFunc("/create_order", handlers.CreateOrder)
-	
+	m.HandleFunc("/create_feedback", handlers.CreateFeedback)
+
 	log.Println("Server started on port :8080 ...")
-	http.ListenAndServe(":8080", m)
+	if err := http.ListenAndServe(":8080", m); err != nil {
+		log.Fatal(err)
+	}
 }

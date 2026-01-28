@@ -81,6 +81,22 @@ func OrderHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func ShowOrdersHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		OrdersInfo := db.CountAllOrders()
+		Orders := db.SelectAllOrders()
+		data := map[string]interface{}{"OrdersInfo": OrdersInfo, "Orders": Orders}
+		tmpl, err := template.ParseFiles("./web/templates/show_orders.html")
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		tmpl.Execute(w, data)
+	} else {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+	}
+}
+
 func GetImages(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		filePath := fmt.Sprintf("./web/img/%s", path.Base(r.URL.String()))
@@ -127,5 +143,37 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
+}
 
+func CreateFeedback(w http.ResponseWriter, r *http.Request) {
+	var newFeedback models.Feedback
+	if r.Method == http.MethodPost {
+		newFeedback.CustomerName = r.FormValue("name")
+		newFeedback.Email = r.FormValue("email")
+		newFeedback.Message = r.FormValue("message")
+		newFeedback.Subject = r.FormValue("subject")
+		err := db.InsertNewFeedback(&newFeedback)
+		if err != nil {
+			log.Println(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		html := `
+				<!DOCTYPE html>
+				<html>
+				<head>
+					<title>Спасибо!</title>
+				</head>
+				<body>
+					<div class="thank-you-message">
+						<h2>Спасибо за ваше сообщение, мы обязательно ответим!</h2>
+						<a href="/">Вернуться на главную</a>
+					</div>
+				</body>
+				</html>
+			`
+		fmt.Fprintf(w, html)
+	} else {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+	}
 }
