@@ -132,9 +132,22 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 				</head>
 				<body>
 					<div class="thank-you-message">
+					
 						<h2>Спасибо за ваш заказ!</h2>
 						<p>Мы получили вашу заявку и свяжемся с вами в ближайшее время для подтверждения.</p>
-						<a href="/">Вернуться на главную</a>
+
+						<form action="/show_orders" method="get" style="display: inline-block;">
+            				<button type="submit" style="margin-right: 10px;">
+                				Отследить заказ
+            				</button>
+        				</form>
+        
+        				<form action="/" method="get" style="display: inline-block;">
+            				<button type="submit">
+                				Вернуться на главную
+            				</button>
+        				</form>
+
 					</div>
 				</body>
 				</html>
@@ -167,7 +180,11 @@ func CreateFeedback(w http.ResponseWriter, r *http.Request) {
 				<body>
 					<div class="thank-you-message">
 						<h2>Спасибо за ваше сообщение, мы обязательно ответим!</h2>
-						<a href="/">Вернуться на главную</a>
+						<form action="/" method="get">
+    						<button type="submit">
+								Вернуться на главную
+							</button>
+						</form>
 					</div>
 				</body>
 				</html>
