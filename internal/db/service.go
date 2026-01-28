@@ -56,7 +56,7 @@ func PopulateDb() {
 		INSERT INTO orders (customer_name,telephone,email,address,delivery_date,delivery_time,order_list,comments,payment_method,status) VALUES
 	 	('Иван Петров','+7912345678','ivan@mail.ru','ул. Ленина 1','2026-01-29','12:00-15:00','Круассан с шоколадом 1 шт','','card','new'),
 	 	('Сергей Рябинин','+7374912123','my@mail.ru','ул. Пушкина 5','2026-01-30','9:00-12:00','Яблочный пирог 1 шт.','Код от домофона 1234','online','delivered');`
-		
+
 	_, err := db.Exec(query)
 	if err != nil {
 		log.Fatal(err)
@@ -166,7 +166,7 @@ func SelectAllOrders() []models.Order {
 			order.StatusText = "Новый"
 		}
 		if order.Status == "delivered" {
-			order.StatusText = "Доставлено"
+			order.StatusText = "Доставлен"
 		}
 
 		Orders = append(Orders, order)
