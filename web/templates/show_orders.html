@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Заказы - Пекарня "Ароматная булочная"</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -1059,6 +1058,7 @@
                         <th>Дата и время доставки</th>
                         <th>Адрес</th>
                         <th>Статус</th>
+                        <th>Действия</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1070,6 +1070,11 @@
                         <td>{{ .DeliveryDateTime }}</td>
                         <td>{{ .Address }}</td>
                         <td><span class="order-status status-{{ .Status }}">{{ .StatusText}}</span></td>
+                        <td class="order-actions">
+                            <form action="/finish_order/{{ .Id }}" method="post">
+                                <button class="order-action-btn">Завершить</button>
+                            </form>
+                        </td>
                     </tr>
                     {{ end }}
                 </tbody>

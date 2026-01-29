@@ -23,6 +23,7 @@ func main() {
 	m.HandleFunc("/images/", handlers.GetImages)
 	m.HandleFunc("/create_order", handlers.CreateOrder)
 	m.HandleFunc("/create_feedback", handlers.CreateFeedback)
+	m.HandleFunc("/finish_order/", handlers.FinishOrder)
 
 	log.Println("Server started on port :8080 ...")
 	if err := http.ListenAndServe(":8080", m); err != nil {

@@ -106,6 +106,22 @@ func GetImages(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func FinishOrder(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		id := path.Base(r.URL.String())
+		err := db.FinishOrder(id)
+		if err != nil {
+			log.Println(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Location", "/show_orders")
+		w.WriteHeader(302)
+	} else {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+	}	
+}
+
 func CreateOrder(w http.ResponseWriter, r *http.Request) {
 	var newOrder models.Order
 	if r.Method == http.MethodPost {
@@ -132,7 +148,7 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 				</head>
 				<body>
 					<div class="thank-you-message">
-					
+
 						<h2>Спасибо за ваш заказ!</h2>
 						<p>Мы получили вашу заявку и свяжемся с вами в ближайшее время для подтверждения.</p>
 

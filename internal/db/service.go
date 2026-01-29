@@ -86,6 +86,16 @@ func InsertNewFeedback(feedback *models.Feedback) error {
 	return nil
 }
 
+func FinishOrder(id string) error {
+	db := DbConnect()
+	defer db.Close()
+	_, err := db.Exec("UPDATE orders SET status = 'delivered' WHERE id = ?", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func CountAllOrders() (models.OrdersInfo) {
 	db := DbConnect()
 	defer db.Close()
