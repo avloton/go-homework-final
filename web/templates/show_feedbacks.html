@@ -12,7 +12,7 @@
             * {
                 margin: 0;
                 padding: 0;
-                box-sizing: bfeedback-box;
+                box-sizing: border-box;
             }
 
             :root {
@@ -22,7 +22,7 @@
                 --light-color: #fff8f0;
                 --text-color: #333;
                 --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                --bfeedback-radius: 10px;
+                --border-radius: 10px;
             }
 
             body {
@@ -134,10 +134,10 @@
                 background-color: var(--primary-color);
                 color: white;
                 padding: 0.8rem 1.5rem;
-                bfeedback-radius: 50px;
+                border-radius: 50px;
                 font-weight: 500;
                 transition: all 0.3s;
-                bfeedback: none;
+                border: none;
                 cursor: pointer;
                 text-align: center;
             }
@@ -177,7 +177,7 @@
 
             .hero-image {
                 flex: 1;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 overflow: hidden;
                 box-shadow: var(--shadow);
             }
@@ -209,7 +209,7 @@
             .feature {
                 text-align: center;
                 padding: 2rem;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 background-color: var(--light-color);
                 box-shadow: var(--shadow);
                 transition: transform 0.3s;
@@ -239,7 +239,7 @@
 
             .product {
                 background-color: white;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 overflow: hidden;
                 box-shadow: var(--shadow);
                 transition: transform 0.3s;
@@ -297,7 +297,7 @@
             }
 
             .about-image {
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 overflow: hidden;
                 box-shadow: var(--shadow);
             }
@@ -339,14 +339,14 @@
                 text-align: center;
                 background-color: white;
                 padding: 2rem;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 box-shadow: var(--shadow);
             }
 
             .team-member img {
                 width: 150px;
                 height: 150px;
-                bfeedback-radius: 50%;
+                border-radius: 50%;
                 object-fit: cover;
                 margin-bottom: 1rem;
             }
@@ -366,7 +366,7 @@
                 text-align: center;
                 padding: 2rem;
                 background-color: white;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 box-shadow: var(--shadow);
             }
 
@@ -381,7 +381,7 @@
                 margin-bottom: 3rem;
                 background-color: white;
                 padding: 2rem;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 box-shadow: var(--shadow);
             }
 
@@ -408,11 +408,11 @@
                 justify-content: space-between;
                 align-items: center;
                 padding: 1rem;
-                bfeedback-bottom: 1px solid #eee;
+                border-bottom: 1px solid #eee;
             }
 
             .menu-item:last-child {
-                bfeedback-bottom: none;
+                border-bottom: none;
             }
 
             .menu-item-info h3 {
@@ -436,7 +436,7 @@
             .menu-note {
                 background-color: white;
                 padding: 2rem;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 box-shadow: var(--shadow);
                 margin-top: 3rem;
             }
@@ -452,7 +452,7 @@
             .feedback-form-container {
                 background-color: white;
                 padding: 2rem;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 box-shadow: var(--shadow);
             }
 
@@ -465,7 +465,7 @@
             .info-box {
                 background-color: white;
                 padding: 2rem;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 box-shadow: var(--shadow);
             }
 
@@ -509,7 +509,7 @@
                 justify-content: space-between;
                 padding: 0.8rem;
                 background-color: var(--light-color);
-                bfeedback-radius: 5px;
+                border-radius: 5px;
             }
 
             .text-link {
@@ -541,8 +541,8 @@
             .form-group select {
                 width: 100%;
                 padding: 0.8rem;
-                bfeedback: 1px solid #ddd;
-                bfeedback-radius: 5px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
                 font-family: 'Roboto', sans-serif;
                 font-size: 1rem;
             }
@@ -551,7 +551,7 @@
             .form-group textarea:focus,
             .form-group select:focus {
                 outline: none;
-                bfeedback-color: var(--secondary-color);
+                border-color: var(--secondary-color);
             }
 
             .form-hint {
@@ -575,7 +575,7 @@
             .feedback-success {
                 background-color: white;
                 padding: 3rem;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 box-shadow: var(--shadow);
                 margin-top: 3rem;
             }
@@ -597,7 +597,7 @@
                 height: 50px;
                 background-color: var(--primary-color);
                 color: white;
-                bfeedback-radius: 50%;
+                border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -648,7 +648,7 @@
                 width: 40px;
                 height: 40px;
                 background-color: rgba(255, 255, 255, 0.1);
-                bfeedback-radius: 50%;
+                border-radius: 50%;
                 transition: all 0.3s;
             }
 
@@ -660,7 +660,7 @@
             .footer-bottom {
                 text-align: center;
                 padding-top: 1.5rem;
-                bfeedback-top: 1px solid rgba(255, 255, 255, 0.1);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
             }
 
             /* Адаптивность */
@@ -732,7 +732,7 @@
             .contact-card {
                 background-color: white;
                 padding: 2rem;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 box-shadow: var(--shadow);
                 text-align: center;
                 transition: transform 0.3s;
@@ -746,7 +746,7 @@
                 width: 70px;
                 height: 70px;
                 background-color: var(--light-color);
-                bfeedback-radius: 50%;
+                border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -761,7 +761,7 @@
             .branches-section {
                 background-color: white;
                 padding: 2rem;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 box-shadow: var(--shadow);
             }
 
@@ -775,8 +775,8 @@
             .branch-card {
                 background-color: var(--light-color);
                 padding: 1.5rem;
-                bfeedback-radius: var(--bfeedback-radius);
-                bfeedback-left: 4px solid var(--secondary-color);
+                border-radius: var(--border-radius);
+                border-left: 4px solid var(--secondary-color);
             }
 
             .branch-card h3 {
@@ -799,7 +799,7 @@
             .contact-form-section {
                 background-color: white;
                 padding: 2rem;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 box-shadow: var(--shadow);
             }
 
@@ -818,7 +818,7 @@
             .map-section {
                 background-color: white;
                 padding: 2rem;
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 box-shadow: var(--shadow);
             }
 
@@ -847,7 +847,7 @@
             }
 
             .map-image {
-                bfeedback-radius: var(--bfeedback-radius);
+                border-radius: var(--border-radius);
                 overflow: hidden;
             }
 
@@ -866,10 +866,10 @@
 
         .feedbacks-table {
             width: 100%;
-            bfeedback-collapse: collapse;
+            border-collapse: collapse;
             margin: 2rem 0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            bfeedback-radius: 10px;
+            border-radius: 10px;
             overflow: hidden;
         }
         
@@ -886,7 +886,7 @@
         
         .feedbacks-table td {
             padding: 1rem;
-            bfeedback-bottom: 1px solid #eee;
+            border-bottom: 1px solid #eee;
         }
         
         .feedbacks-table tbody tr {
@@ -903,7 +903,7 @@
         
         .feedback-status {
             padding: 0.4rem 0.8rem;
-            bfeedback-radius: 20px;
+            border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
             display: inline-block;
@@ -937,8 +937,8 @@
         .feedback-action-btn {
             padding: 0.4rem 0.8rem;
             background-color: #f5f5f5;
-            bfeedback: none;
-            bfeedback-radius: 4px;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 0.85rem;
             transition: all 0.3s;
@@ -952,7 +952,7 @@
         .table-container {
             overflow-x: auto;
             background-color: white;
-            bfeedback-radius: 10px;
+            border-radius: 10px;
             padding: 1.5rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
@@ -967,7 +967,7 @@
         .summary-card {
             background-color: white;
             padding: 1.5rem;
-            bfeedback-radius: 10px;
+            border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
@@ -989,8 +989,8 @@
         .filter-btn {
             padding: 0.6rem 1.2rem;
             background-color: #f5f5f5;
-            bfeedback: none;
-            bfeedback-radius: 20px;
+            border: none;
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s;
         }
