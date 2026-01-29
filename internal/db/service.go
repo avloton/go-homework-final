@@ -123,11 +123,11 @@ func SelectAllOrders() []models.Order {
 								status 
 							FROM orders`,
 						)
+	defer rows.Close()
 	if err != nil {
 		log.Println("Query SelectAllOrders error: ", err)
 		return make([]models.Order, 0)
 	}
-	defer rows.Close()
 
 	Orders := []models.Order{}
 
@@ -178,11 +178,11 @@ func SelectAllPopularProducts() []models.Product {
 	db := DbConnect()
 	defer db.Close()
 	rows, err := db.Query(`SELECT id, name, description, type, price, units, image_path FROM popular_products`)
+	defer rows.Close()
 	if err != nil {
 		log.Println("Query SelectAllPopularProducts error: ", err)
 		return make([]models.Product, 0)
 	}
-	defer rows.Close()
 	
 	Products := []models.Product{}
 	
