@@ -38,3 +38,7 @@ type Feedback struct {
 	Subject 		string
 	Message 		string
 }
+
+type FeedbacksInfo struct {
+	CountAll	int
+}

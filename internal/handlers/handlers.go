@@ -97,6 +97,22 @@ func ShowOrdersHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func ShowFeedbacksHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		FeedbacksInfo := db.CountAllFeedbacks()
+		Feedbacks := db.SelectAllFeedbacks()
+		data := map[string]interface{}{"FeedbacksInfo": FeedbacksInfo, "Feedbacks": Feedbacks}
+		tmpl, err := template.ParseFiles("./web/templates/show_feedbacks.html")
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		tmpl.Execute(w, data)
+	} else {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+	}
+}
+
 func GetImages(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		filePath := fmt.Sprintf("./web/img/%s", path.Base(r.URL.String()))
@@ -116,6 +132,22 @@ func FinishOrder(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		w.Header().Set("Location", "/show_orders")
+		w.WriteHeader(302)
+	} else {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+	}	
+}
+
+func DeleteFeedback(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		id := path.Base(r.URL.String())
+		err := db.DeleteFeedback(id)
+		if err != nil {
+			log.Println(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Location", "/show_feedbacks")
 		w.WriteHeader(302)
 	} else {
 		w.WriteHeader(http.StatusMethodNotAllowed)

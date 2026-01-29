@@ -20,10 +20,12 @@ func main() {
 	m.HandleFunc("/menu", handlers.MenuHandler)
 	m.HandleFunc("/order", handlers.OrderHandler)
 	m.HandleFunc("/show_orders", handlers.ShowOrdersHandler)
+	m.HandleFunc("/show_feedbacks", handlers.ShowFeedbacksHandler)
 	m.HandleFunc("/images/", handlers.GetImages)
 	m.HandleFunc("/create_order", handlers.CreateOrder)
 	m.HandleFunc("/create_feedback", handlers.CreateFeedback)
 	m.HandleFunc("/finish_order/", handlers.FinishOrder)
+	m.HandleFunc("/delete_feedback/", handlers.DeleteFeedback)
 
 	log.Println("Server started on port :8080 ...")
 	if err := http.ListenAndServe(":8080", m); err != nil {

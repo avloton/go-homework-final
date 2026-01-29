@@ -55,7 +55,13 @@ func PopulateDb() {
 		
 		INSERT INTO orders (customer_name,telephone,email,address,delivery_date,delivery_time,order_list,comments,payment_method,status) VALUES
 	 	('Иван Петров','+7912345678','ivan@mail.ru','ул. Ленина 1','2026-01-29','12:00-15:00','Круассан с шоколадом 1 шт','','card','new'),
-	 	('Сергей Рябинин','+7374912123','my@mail.ru','ул. Пушкина 5','2026-01-30','9:00-12:00','Яблочный пирог 1 шт.','Код от домофона 1234','online','delivered');`
+		('Алексей Иванович','+79122342322','alex@mail.ru','ул. Грибоедова 15','2026-01-30','12:00-15:00','Яблочный пирог','Встречу у подъезда','online','new'),
+	 	('Сергей Рябинин','+7374912123','my@mail.ru','ул. Пушкина 5','2026-01-30','9:00-12:00','Яблочный пирог 1 шт.','Код от домофона 1234','online','delivered');
+		
+		INSERT INTO feedbacks (customer_name, email, subject, message) VALUES
+		('Инкогнито', 'inc@mail.ru', '', 'Спасибо за все!'),
+		('Алексей', 'alex@mail.ru', 'Круассаны', 'Добавьте больше начинки!'),
+		('Неизвестный', 'unknown@mail.ru', '', 'А в соседней пекарни вкуснее!');`
 
 	_, err := db.Exec(query)
 	if err != nil {
@@ -96,6 +102,28 @@ func FinishOrder(id string) error {
 	return nil
 }
 
+func DeleteFeedback(id string) error {
+	db := DbConnect()
+	defer db.Close()
+	_, err := db.Exec("DELETE FROM feedbacks WHERE id = ?", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func CountAllFeedbacks() models.FeedbacksInfo {
+	db := DbConnect()
+	defer db.Close()
+	var feedbacksInfo models.FeedbacksInfo
+	row := db.QueryRow(`SELECT count(*) FROM feedbacks`)
+	err := row.Scan(&feedbacksInfo.CountAll)
+	if err != nil {
+		log.Println("CountAllFeedbacks: ", err)
+	}
+	return feedbacksInfo
+}
+
 func CountAllOrders() (models.OrdersInfo) {
 	db := DbConnect()
 	defer db.Close()
@@ -114,6 +142,32 @@ func CountAllOrders() (models.OrdersInfo) {
 	}
 
 	return ordersInfo
+}
+
+func SelectAllFeedbacks() []models.Feedback {
+	db := DbConnect()
+	defer db.Close()
+	rows, err := db.Query(`SELECT id, customer_name, email, subject, message FROM feedbacks`)
+	defer rows.Close()
+	if err != nil {
+		log.Println("Query SelectAllFeedbacks error: ", err)
+		return make([]models.Feedback, 0)
+	}
+	Feedbacks := []models.Feedback{}
+	for rows.Next() {
+		feedback := models.Feedback{}
+		var FeedbackSubject sql.NullString
+		err := rows.Scan(&feedback.Id, &feedback.CustomerName, &feedback.Email, &FeedbackSubject, &feedback.Message)
+		if err != nil {
+			log.Println("Error with SelectAllFeedbacks scan: ", err)
+			continue
+		}
+		if FeedbackSubject.Valid {
+			feedback.Subject = FeedbackSubject.String
+		}
+		Feedbacks = append(Feedbacks, feedback)
+	}
+	return Feedbacks
 }
 
 func SelectAllOrders() []models.Order {
