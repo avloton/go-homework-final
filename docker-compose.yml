@@ -1,0 +1,20 @@
+services:
+
+  server:
+    image: mybakery:latest
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - ./web:/app/web:ro
+      - ./db:/app/db:rw
+    depends_on:
+      init-db:
+        condition: service_started
+  
+  init-db:
+    image: mybakery:latest
+    restart: no
+    command: populate
+    volumes:
+      - ./db:/app/db:rw
