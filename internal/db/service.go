@@ -102,6 +102,16 @@ func FinishOrder(id string) error {
 	return nil
 }
 
+func ReturnOrder(id string) error {
+	db := DbConnect()
+	defer db.Close()
+	_, err := db.Exec("UPDATE orders SET status = 'new' WHERE id = ?", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func DeleteFeedback(id string) error {
 	db := DbConnect()
 	defer db.Close()
@@ -230,7 +240,7 @@ func SelectAllOrders() []models.Order {
 			order.StatusText = "Новый"
 		}
 		if order.Status == "delivered" {
-			order.StatusText = "Доставлен"
+			order.StatusText = "Обработан"
 		}
 
 		Orders = append(Orders, order)

@@ -138,6 +138,22 @@ func FinishOrder(w http.ResponseWriter, r *http.Request) {
 	}	
 }
 
+func ReturnOrder(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		id := path.Base(r.URL.String())
+		err := db.ReturnOrder(id)
+		if err != nil {
+			log.Println(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Location", "/show_orders")
+		w.WriteHeader(302)
+	} else {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+	}	
+}
+
 func DeleteFeedback(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		id := path.Base(r.URL.String())

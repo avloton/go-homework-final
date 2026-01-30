@@ -1078,6 +1078,11 @@
                                 <button class="order-action-btn">Завершить</button>
                             </form>
                         </td>
+                        <td class="order-actions">
+                            <form action="/return_order/{{ .Id }}" method="post">
+                                <button class="order-action-btn">Вернуть  </button>
+                            </form>
+                        </td>
                     </tr>
                     {{ end }}
                 </tbody>

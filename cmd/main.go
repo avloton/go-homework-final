@@ -25,6 +25,7 @@ func main() {
 	m.HandleFunc("/create_order", handlers.CreateOrder)
 	m.HandleFunc("/create_feedback", handlers.CreateFeedback)
 	m.HandleFunc("/finish_order/", handlers.FinishOrder)
+	m.HandleFunc("/return_order/", handlers.ReturnOrder)
 	m.HandleFunc("/delete_feedback/", handlers.DeleteFeedback)
 
 	log.Println("Server started on port :8080 ...")
