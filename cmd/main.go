@@ -4,15 +4,20 @@ import (
 	"log"
 	"mywebsite/internal/db"
 	"mywebsite/internal/handlers"
+	"mywebsite/internal/middleware"
 	"net/http"
 	"os"
+
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func main() {
+	//Режим инициализации БД
 	if len(os.Args) == 2 && os.Args[1] == "populate" {
 		db.PopulateDb()
 		os.Exit(0)
 	}
+	//Режим запуска веб-сервиса
 	m := http.NewServeMux()
 	m.HandleFunc("/", handlers.IndexHandler)
 	m.HandleFunc("/about", handlers.AboutHandler)
@@ -28,8 +33,15 @@ func main() {
 	m.HandleFunc("/return_order/", handlers.ReturnOrder)
 	m.HandleFunc("/delete_feedback/", handlers.DeleteFeedback)
 
+	//Отдаем метрики через эндпоинт /metrics
+	m.Handle("/metrics", promhttp.Handler())
+
+	//Метрики будут собираться через middleware
+	handlerWithMetrics := middleware.MetricsMiddleware(m)
+
 	log.Println("Server started on port :8080 ...")
-	if err := http.ListenAndServe(":8080", m); err != nil {
+	log.Println("Metrics available at :8080/metrics")
+	if err := http.ListenAndServe(":8080", handlerWithMetrics); err != nil {
 		log.Fatal(err)
 	}
 }

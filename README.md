@@ -39,8 +39,10 @@ go-homework-final/
 │   │   └── service.go       # Работа с БД (CRUD операции)
 │   ├── handlers/
 │   │   └── handlers.go      # HTTP обработчики
-│   └── models/
-│       └── models.go        # Модели данных
+│   ├── models/
+│   |   └── models.go        # Модели данных
+|   └── middleware/
+|        └── middleware.go   # Middleware обработчики (Prometheus)
 ├── web/
 │   ├── img/                 # Изображения
 │   └── templates/           # HTML шаблоны
@@ -104,6 +106,25 @@ make docker-down       # Остановить Docker Compose
 make docker-logs       # Показать логи контейнеров
 make docker-restart    # Перезапустить контейнеры
 ```
+
+## API Endpoints
+
+| Метод | Путь | Описание |
+|-------|-----|----------|
+| GET | `/` | Главная страница |
+| GET | `/about` | Страница "О нас" |
+| GET | `/menu` | Меню продукции |
+| GET | `/order` | Форма заказа |
+| GET | `/contacts` | Контакты |
+| GET | `/show_orders` | Просмотр всех заказов (админ) |
+| GET | `/show_feedbacks` | Просмотр отзывов (админ) |
+| GET | `/images/*` | Статические изображения |
+| GET | `/metrics` | Метрики для Prometheus |
+| POST | `/create_order` | Создать новый заказ |
+| POST | `/create_feedback` | Создать отзыв |
+| POST | `/finish_order/{id}` | Завершить заказ |
+| POST | `/return_order/{id}` | Вернуть заказ в статус "новый" |
+| POST | `/delete_feedback/{id}` | Удалить отзыв |
 
 ## База данных
 
