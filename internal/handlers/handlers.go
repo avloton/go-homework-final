@@ -5,6 +5,7 @@ import (
 	"log"
 	"mywebsite/internal/db"
 	"mywebsite/internal/models"
+	"mywebsite/internal/templates"
 	"net/http"
 	"path"
 	"text/template"
@@ -188,35 +189,7 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		html := `
-				<!DOCTYPE html>
-				<html>
-				<head>
-					<title>Спасибо за заказ!</title>
-				</head>
-				<body>
-					<div class="thank-you-message">
-
-						<h2>Спасибо за ваш заказ!</h2>
-						<p>Мы получили вашу заявку и свяжемся с вами в ближайшее время для подтверждения.</p>
-
-						<form action="/show_orders" method="get" style="display: inline-block;">
-            				<button type="submit" style="margin-right: 10px;">
-                				Отследить заказ
-            				</button>
-        				</form>
-        
-        				<form action="/" method="get" style="display: inline-block;">
-            				<button type="submit">
-                				Вернуться на главную
-            				</button>
-        				</form>
-
-					</div>
-				</body>
-				</html>
-			`
-		fmt.Fprintf(w, html)
+		fmt.Fprintf(w, templates.OrderThanks)
 	} else {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
@@ -235,25 +208,7 @@ func CreateFeedback(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		html := `
-				<!DOCTYPE html>
-				<html>
-				<head>
-					<title>Спасибо!</title>
-				</head>
-				<body>
-					<div class="thank-you-message">
-						<h2>Спасибо за ваше сообщение, мы обязательно ответим!</h2>
-						<form action="/" method="get">
-    						<button type="submit">
-								Вернуться на главную
-							</button>
-						</form>
-					</div>
-				</body>
-				</html>
-			`
-		fmt.Fprintf(w, html)
+		fmt.Fprintf(w, templates.FeedbackTanks)
 	} else {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
