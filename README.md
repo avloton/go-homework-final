@@ -41,8 +41,10 @@ go-homework-final/
 │   │   └── handlers.go      # HTTP обработчики
 │   ├── models/
 │   |   └── models.go        # Модели данных
-|   └── middleware/
-|        └── middleware.go   # Middleware обработчики (Prometheus)
+|   ├── middleware/
+|   |     └── middleware.go  # Middleware обработчики (Prometheus)
+|   └── templates/
+|        └── html.go         # HTML шаблоны (для отображения только в заданных сценариях)
 ├── web/
 │   ├── img/                 # Изображения
 │   └── templates/           # HTML шаблоны
