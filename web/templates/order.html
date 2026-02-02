@@ -932,7 +932,7 @@
                     
                     <div class="form-group">
                         <label for="order-items">Что вы хотите заказать? *</label>
-                        <textarea id="order-items" name="order-items" rows="5" required placeholder="Например: 2 ржаных хлеба, 3 круассана с шоколадом, 1 яблочный пирог. Вы можете посмотреть полное меню на странице 'Меню'"></textarea>
+                        <textarea id="order-items" name="order-items" rows="5" required placeholder="Например: 2 ржаных хлеба, 3 круассана с шоколадом, 1 яблочный пирог. Вы можете посмотреть полное меню на странице 'Меню'">{{ .SelectedName }}</textarea>
                         <p class="form-hint">Посмотреть <a href="/menu" class="text-link">полное меню с ценами</a></p>
                     </div>
                     
@@ -981,7 +981,7 @@
                     <h3>Популярные товары</h3>
                     <div class="popular-items">
 
-                        {{ range . }}
+                        {{ range .Products }}
                         <div class="popular-item">
                             <div class="popular-item-info">
                                 <h4>{{ .Name }}</h4>

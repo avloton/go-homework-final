@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	//"io"
 	"log"
 	"mywebsite/internal/db"
 	"mywebsite/internal/models"
@@ -71,12 +72,14 @@ func MenuHandler(w http.ResponseWriter, r *http.Request) {
 func OrderHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		Products := db.SelectAllPopularProducts()
+		SelectedName := r.URL.Query().Get("name")
+		data := map[string]interface{} {"SelectedName": SelectedName, "Products": Products}
 		tmpl, err := template.ParseFiles("./web/templates/order.html")
 		if err != nil {
 			log.Println(err)
 			return
 		}
-		tmpl.Execute(w, Products)
+		tmpl.Execute(w, data)
 	} else {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}

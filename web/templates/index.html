@@ -944,7 +944,11 @@
                     <img src="{{ .ImagePath }}" alt="{{ .Name }}">
                     <h3>{{ .Name }}</h3>
                     <p class="price">{{ .Price }} ₽</p>
-                    <a href="/order" class="btn small-btn">Заказать</a>
+                    <!-- <a href="/order" class="btn small-btn">Заказать</a> -->
+                    <form action="/order" method="get">
+                        <input type="hidden" name="name" value="{{.Name}}">
+                        <button type="submit" class="btn small-btn">Заказать</button>
+                    </form>
                 </div>
                 {{ end }}
 
